@@ -2,7 +2,7 @@
 //  XXBPhotoBrowser.m
 //  图片浏览器
 //
-//  Created by Jinhong on 15/2/25.
+//  Created by 小小兵 on 15/2/25.
 //  Copyright (c) 2015年 xiaoxiaobing. All rights reserved.
 //
 

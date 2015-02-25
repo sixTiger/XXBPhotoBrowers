@@ -2,7 +2,7 @@
 //  XXBWaterImageView.h
 //  waterPreTest
 //
-//  Created by Jinhong on 15/2/9.
+//  Created by 小小兵 on 15/2/9.
 //  Copyright (c) 2015年 xiaoxiaobing. All rights reserved.
 //  为了保证最佳的效果 这个view请设置成正方形的
 
