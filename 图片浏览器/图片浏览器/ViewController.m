@@ -76,7 +76,6 @@
         XXBPhoto *photo = [[XXBPhoto alloc] init];
         photo.url = [NSURL URLWithString:url]; // 图片路径
         photo.srcImageView = _imageViews[i]; // 来源于哪个UIImageView
-        NSLog(@"%@",NSStringFromCGRect(photo.srcImageView.bounds));
         [photos addObject:photo];
     }
     

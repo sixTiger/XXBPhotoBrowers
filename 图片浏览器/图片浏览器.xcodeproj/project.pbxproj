@@ -361,6 +361,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = xiaoxiaobing;
 				TargetAttributes = {
+					C439E91D1A9DADF3000A1DE0 = {
+						DevelopmentTeam = USZUZCA5NW;
+					};
 					C439E93E1A9DADF3000A1DE0 = {
 						TestTargetID = C439E91D1A9DADF3000A1DE0;
 					};
@@ -505,7 +508,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Lin Deng (93H8KXG8ZE)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lin Deng (93H8KXG8ZE)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -543,7 +547,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Lin Deng (93H8KXG8ZE)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lin Deng (93H8KXG8ZE)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -564,10 +569,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Tiger six (492J728U5E)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tiger six (492J728U5E)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "图片浏览器/图片浏览器-Prefix.pch";
 				INFOPLIST_FILE = "图片浏览器/图片浏览器-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "3c647430-13d0-4ce7-b7ce-71f13acef1e0";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -577,10 +586,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Tiger six (492J728U5E)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tiger six (492J728U5E)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "图片浏览器/图片浏览器-Prefix.pch";
 				INFOPLIST_FILE = "图片浏览器/图片浏览器-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "3c647430-13d0-4ce7-b7ce-71f13acef1e0";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -644,6 +657,7 @@
 				C439E9521A9DADF3000A1DE0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C439E9531A9DADF3000A1DE0 /* Build configuration list for PBXNativeTarget "图片浏览器Tests" */ = {
 			isa = XCConfigurationList;
@@ -652,6 +666,7 @@
 				C439E9551A9DADF3000A1DE0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
