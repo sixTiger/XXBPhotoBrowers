@@ -122,11 +122,8 @@
         // 直接显示进度条
         [_photoLoadingView showLoading];
         [self addSubview:_photoLoadingView];
-        
         __weak XXBPhotoView *photoView = self;
         __weak XXBPhotoLoadingView *loading = _photoLoadingView;
-        
-        
         [_imageView sd_setImageWithURL:_photo.url placeholderImage:_photo.srcImageView.image options:SDWebImageRetryFailed|SDWebImageLowPriority progress:^(NSInteger receivedSize, NSInteger expectedSize) {
             if (receivedSize > kMinProgress) {
                 loading.progress = (CGFloat)receivedSize/(CGFloat)expectedSize;
@@ -163,7 +160,7 @@
 #pragma mark 调整frame
 - (void)adjustFrame
 {
-	if (_imageView.image == nil) return;
+    if (_imageView.image == nil) return;
     
     // 基本尺寸参数
     CGSize boundsSize = self.bounds.size;
@@ -173,21 +170,21 @@
     CGSize imageSize = _imageView.image.size;
     CGFloat imageWidth = imageSize.width;
     CGFloat imageHeight = imageSize.height;
-	
-	// 设置伸缩比例
+    
+    // 设置伸缩比例
     CGFloat minScale = boundsWidth / imageWidth;
-	if (minScale > 1)
+    if (minScale > 1)
     {
-		minScale = 1.0;
-	}
-	CGFloat maxScale = 3.0;
-	if ([UIScreen instancesRespondToSelector:@selector(scale)])
+        minScale = 1.0;
+    }
+    CGFloat maxScale = 3.0;
+    if ([UIScreen instancesRespondToSelector:@selector(scale)])
     {
-		maxScale = maxScale / [[UIScreen mainScreen] scale];
-	}
-	self.maximumZoomScale = maxScale;
-	self.minimumZoomScale = minScale;
-	self.zoomScale = minScale;
+        maxScale = maxScale / [[UIScreen mainScreen] scale];
+    }
+    self.maximumZoomScale = maxScale;
+    self.minimumZoomScale = minScale;
+    self.zoomScale = minScale;
     
     CGRect imageFrame = CGRectMake(0, 0, boundsWidth, imageHeight * boundsWidth / imageWidth);
     // 内容尺寸
@@ -197,11 +194,11 @@
     if (imageFrame.size.height < boundsHeight)
     {
         imageFrame.origin.y = floorf((boundsHeight - imageFrame.size.height) / 2.0);
-	}
+    }
     else
     {
         imageFrame.origin.y = 0;
-	}
+    }
     
     if (_photo.firstShow)
     { // 第一次显示的图片
@@ -221,12 +218,14 @@
 }
 
 #pragma mark - UIScrollViewDelegate
-- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-	return _imageView;
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+{
+    return _imageView;
 }
 
 #pragma mark - 手势处理
-- (void)handleSingleTap:(UITapGestureRecognizer *)tap {
+- (void)handleSingleTap:(UITapGestureRecognizer *)tap
+{
     _doubleTap = NO;
     [self performSelector:@selector(hide) withObject:nil afterDelay:0.5];
 }
@@ -285,14 +284,14 @@
     _doubleTap = YES;
     
     CGPoint touchPoint = [tap locationInView:self];
-	if (self.zoomScale == self.maximumZoomScale)
+    if (self.zoomScale == self.maximumZoomScale)
     {
-		[self setZoomScale:self.minimumZoomScale animated:YES];
-	}
+        [self setZoomScale:self.minimumZoomScale animated:YES];
+    }
     else
     {
-		[self zoomToRect:CGRectMake(touchPoint.x, touchPoint.y, 1, 1) animated:YES];
-	}
+        [self zoomToRect:CGRectMake(touchPoint.x, touchPoint.y, 1, 1) animated:YES];
+    }
 }
 
 - (void)dealloc

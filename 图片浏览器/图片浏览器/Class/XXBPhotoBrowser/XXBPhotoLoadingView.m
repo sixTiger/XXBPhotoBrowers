@@ -20,17 +20,14 @@
 
 - (id)initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:[UIScreen mainScreen].bounds];
-    if (self) {
-        // Initialization code
-    }
-    return self;
+    return [super initWithFrame:[UIScreen mainScreen].bounds];
 }
 - (void)showFailure
 {
     [_progressView removeFromSuperview];
     
-    if (_failureLabel == nil) {
+    if (_failureLabel == nil)
+    {
         _failureLabel = [[UILabel alloc] init];
         _failureLabel.bounds = CGRectMake(0, 0, self.bounds.size.width, 44);
         _failureLabel.textAlignment = NSTextAlignmentCenter;
@@ -47,8 +44,8 @@
 - (void)showLoading
 {
     [_failureLabel removeFromSuperview];
-    
-    if (_progressView == nil) {
+    if (_progressView == nil)
+    {
         _progressView = [[XXBWaterView alloc] init];
         _progressView.bounds = CGRectMake( 0, 0, 100, 100);
         _progressView.waterMargin = 0.3;
@@ -59,16 +56,15 @@
     _progressView.waterPrecent = kMinProgress;
     [self addSubview:_progressView];
 }
-
 #pragma mark - customlize method
 - (void)setProgress:(float)progress
 {
     _progress = progress;
     _progressView.waterPrecent = progress;
-    if (progress >= 1.0) {
+    if (progress >= 1.0)
+    {
         [_progressView waterAnimationStop];
         [_progressView removeFromSuperview];
     }
 }
-
 @end

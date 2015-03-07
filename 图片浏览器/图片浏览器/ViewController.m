@@ -70,7 +70,8 @@
     NSInteger count = _urls.count;
     // 1.封装图片数据
     NSMutableArray *photos = [NSMutableArray arrayWithCapacity:count];
-    for (int i = 0; i<count; i++) {
+    for (int i = 0; i<count; i++)
+    {
         // 替换为中等尺寸图片
         NSString *url = [_urls[i] stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"bmiddle"];
         XXBPhoto *photo = [[XXBPhoto alloc] init];
@@ -78,7 +79,6 @@
         photo.srcImageView = _imageViews[i]; // 来源于哪个UIImageView
         [photos addObject:photo];
     }
-    
     // 2.显示相册
     XXBPhotoBrowser *browser = [[XXBPhotoBrowser alloc] init];
     browser.currentPhotoIndex = tap.view.tag; // 弹出相册时显示的第一张图片是？

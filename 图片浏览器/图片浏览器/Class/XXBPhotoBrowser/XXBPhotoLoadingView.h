@@ -4,7 +4,7 @@
 //
 //  Created by 小小兵 on 15/2/25.
 //  Copyright (c) 2015年 xiaoxiaobing. All rights reserved.
-//
+//  加载进度窗口
 
 #import <UIKit/UIKit.h>
 

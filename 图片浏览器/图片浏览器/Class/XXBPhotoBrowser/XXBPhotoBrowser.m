@@ -10,10 +10,7 @@
 #import "XXBPhoto.h"
 #import "XXBPhotoView.h"
 #import "SDWebImageManager+XXB.m"
-
-
 #import "XXBPhotoToolbar.h"
-
 #define kPadding 10
 #define kPhotoViewTagOffset 1000
 #define kPhotoViewIndex(photoView) ([photoView tag] - kPhotoViewTagOffset)
@@ -27,9 +24,6 @@
     NSMutableSet *_reusablePhotoViews;
     // 一开始的状态栏
     BOOL _statusBarHiddenInited;
-    
-    
-    
     // 工具条
     XXBPhotoToolbar *_toolbar;
 }
@@ -43,31 +37,27 @@
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
     self.view = [[UIView alloc] init];
     self.view.frame = [UIScreen mainScreen].bounds;
-    self.view.backgroundColor = [UIColor blackColor];
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     // 1.创建UIScrollView
     [self createScrollView];
-    
     // 2.创建工具条
     [self createToolbar];
 }
-
 - (void)show
 {
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     [window addSubview:self.view];
+#pragma mark -  这里直接来了个背景色 可以来一个背景图片
+    self.view.backgroundColor = [UIColor blackColor];
     [window.rootViewController addChildViewController:self];
-    
-    if (_currentPhotoIndex == 0) {
+    if (_currentPhotoIndex == 0)
+    {
         [self showPhotos];
     }
 }
-
-#pragma mark - 私有方法
 #pragma mark 创建工具条
 - (void)createToolbar
 {
@@ -78,10 +68,8 @@
     _toolbar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     _toolbar.photos = _photos;
     [self.view addSubview:_toolbar];
-    
     [self updateTollbarState];
 }
-
 #pragma mark 创建UIScrollView
 - (void)createScrollView
 {
@@ -99,51 +87,44 @@
     [self.view addSubview:_photoScrollView];
     _photoScrollView.contentOffset = CGPointMake(_currentPhotoIndex * frame.size.width, 0);
 }
-
 - (void)setPhotos:(NSArray *)photos
 {
     _photos = photos;
-    
-    if (photos.count > 1) {
+    if (photos.count > 1)
+    {
         _visiblePhotoViews = [NSMutableSet set];
         _reusablePhotoViews = [NSMutableSet set];
     }
-    
-    for (int i = 0; i<_photos.count; i++) {
+    for (int i = 0; i<_photos.count; i++)
+    {
         XXBPhoto *photo = _photos[i];
         photo.index = i;
         photo.firstShow = i == _currentPhotoIndex;
     }
 }
-
 #pragma mark 设置选中的图片
 - (void)setCurrentPhotoIndex:(NSUInteger)currentPhotoIndex
 {
     _currentPhotoIndex = currentPhotoIndex;
-    
-    for (int i = 0; i<_photos.count; i++) {
+    for (int i = 0; i<_photos.count; i++)
+    {
         XXBPhoto *photo = _photos[i];
         photo.firstShow = i == currentPhotoIndex;
     }
-    
-    if ([self isViewLoaded]) {
-        _photoScrollView.contentOffset = CGPointMake(_currentPhotoIndex * _photoScrollView.frame.size.width, 0);
-        
+    if ([self isViewLoaded])
+    {
+        _photoScrollView.contentOffset = CGPointMake(_currentPhotoIndex * _photoScrollView.frame.size.width , 0);
         // 显示所有的相片
         [self showPhotos];
     }
 }
-
 #pragma mark - XXBPhotoView代理
 - (void)photoViewSingleTap:(XXBPhotoView *)photoView
 {
     [UIApplication sharedApplication].statusBarHidden = _statusBarHiddenInited;
     self.view.backgroundColor = [UIColor clearColor];
-    
-    // 移除工具条
     [_toolbar removeFromSuperview];
 }
-
 - (void)photoViewDidEndZoom:(XXBPhotoView *)photoView
 {
     [self.view removeFromSuperview];
@@ -154,16 +135,15 @@
 {
     _toolbar.currentPhotoIndex = _currentPhotoIndex;
 }
-
 #pragma mark 显示照片
 - (void)showPhotos
 {
     // 只有一张图片
-    if (_photos.count == 1) {
+    if (_photos.count == 1)
+    {
         [self showPhotoViewAtIndex:0];
         return;
     }
-    
     CGRect visibleBounds = _photoScrollView.bounds;
     NSInteger firstIndex = (NSInteger)floorf((CGRectGetMinX(visibleBounds)+kPadding*2) / CGRectGetWidth(visibleBounds));
     NSInteger lastIndex  = (NSInteger)floorf((CGRectGetMaxX(visibleBounds)-kPadding*2-1) / CGRectGetWidth(visibleBounds));
@@ -171,7 +151,6 @@
     if (firstIndex >= _photos.count) firstIndex = _photos.count - 1;
     if (lastIndex < 0) lastIndex = 0;
     if (lastIndex >= _photos.count) lastIndex = _photos.count - 1;
-    
     // 回收不再显示的ImageView
     NSInteger photoViewIndex;
     for (XXBPhotoView *photoView in _visiblePhotoViews)
@@ -183,15 +162,15 @@
             [photoView removeFromSuperview];
         }
     }
-    
     [_visiblePhotoViews minusSet:_reusablePhotoViews];
     while (_reusablePhotoViews.count > 2)
     {
         [_reusablePhotoViews removeObject:[_reusablePhotoViews anyObject]];
     }
-    
-    for (NSUInteger index = firstIndex; index <= lastIndex; index++) {
-        if (![self isShowingPhotoViewAtIndex:index]) {
+    for (NSUInteger index = firstIndex; index <= lastIndex; index++)
+    {
+        if (![self isShowingPhotoViewAtIndex:index])
+        {
             [self showPhotoViewAtIndex:index];
         }
     }
@@ -206,14 +185,13 @@
         photoView = [[XXBPhotoView alloc] init];
         photoView.photoViewDelegate = self;
     }
-    
     // 调整当期页的frame
     CGRect bounds = _photoScrollView.bounds;
     CGRect photoViewFrame = bounds;
     photoViewFrame.size.width -= (2 * kPadding);
     photoViewFrame.origin.x = (bounds.size.width * index) + kPadding;
     photoView.tag = kPhotoViewTagOffset + index;
-    
+
     XXBPhoto *photo = _photos[index];
     photoView.frame = photoViewFrame;
     photoView.photo = photo;
@@ -223,26 +201,27 @@
     
     [self loadImageNearIndex:index];
 }
-
 #pragma mark 加载index附近的图片
 - (void)loadImageNearIndex:(NSInteger)index
 {
-    if (index > 0) {
+    if (index > 0)
+    {
         XXBPhoto *photo = _photos[index - 1];
         [SDWebImageManager downloadWithURL:photo.url];
     }
-    
-    if (index < _photos.count - 1) {
+    if (index < _photos.count - 1)
+    {
         XXBPhoto *photo = _photos[index + 1];
         [SDWebImageManager downloadWithURL:photo.url];
     }
 }
-
 #pragma mark index这页是否正在显示
 - (BOOL)isShowingPhotoViewAtIndex:(NSUInteger)index
 {
-    for (XXBPhotoView *photoView in _visiblePhotoViews) {
-        if (kPhotoViewIndex(photoView) == index) {
+    for (XXBPhotoView *photoView in _visiblePhotoViews)
+    {
+        if (kPhotoViewIndex(photoView) == index)
+        {
             return YES;
         }
     }
@@ -258,16 +237,15 @@
     }
     return photoView;
 }
-
 #pragma mark 更新toolbar状态
 - (void)updateTollbarState
 {
     _currentPhotoIndex = _photoScrollView.contentOffset.x / _photoScrollView.frame.size.width + 0.5;
     _toolbar.currentPhotoIndex = _currentPhotoIndex;
 }
-
 #pragma mark - UIScrollView Delegate
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
     [self showPhotos];
     [self updateTollbarState];
 }
