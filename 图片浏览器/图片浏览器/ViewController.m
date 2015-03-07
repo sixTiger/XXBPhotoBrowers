@@ -67,7 +67,7 @@
 
 - (void)tapImage:(UITapGestureRecognizer *)tap
 {
-    int count = _urls.count;
+    NSInteger count = _urls.count;
     // 1.封装图片数据
     NSMutableArray *photos = [NSMutableArray arrayWithCapacity:count];
     for (int i = 0; i<count; i++) {
